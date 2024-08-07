@@ -39,7 +39,12 @@ public class BorrowingService {
 
     @Transactional
     public BorrowingRecord returnBook(Long bookId, Long patronId) {
-        BorrowingRecord borrowingRecord = borrowingRecordRepository.findByBookAndPatron(bookId, patronId);
+        Book book = bookRepository.findById(bookId)
+            .orElseThrow(() -> new RuntimeException("Book not found"));
+        Patron patron = patronRepository.findById(patronId)
+            .orElseThrow(() -> new RuntimeException("Patron not found"));
+
+        BorrowingRecord borrowingRecord = borrowingRecordRepository.findByBookAndPatron(book, patron);
         if (borrowingRecord == null) {
             throw new RuntimeException("Borrowing record not found");
         }
