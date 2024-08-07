@@ -17,7 +17,7 @@ import com.example.library_management_system.Entity.Patron;
 import com.example.library_management_system.Service.PatronService;
 
 @RestController
-@RequestMapping("/api/patron")
+@RequestMapping("/api/patrons")
 public class PatronController {
     
     @Autowired
